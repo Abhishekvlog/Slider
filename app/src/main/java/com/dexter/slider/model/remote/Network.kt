@@ -1,0 +1,18 @@
+package com.dexter.slider.model.remote
+
+import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
+
+object Network {
+
+    //https://gist.githubusercontent.com/anishbajpai014/d482191cb4fff429333c5ec64b38c197/raw/b11f56c3177a9ddc6649288c80a004e7df41e3b9/HiringTask.json
+
+    fun getRetrofitInstance(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://gist.githubusercontent.com/")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .build()
+    }
+
+    val  apidata  = getRetrofitInstance().create(APIClient::class.java)
+
+}
