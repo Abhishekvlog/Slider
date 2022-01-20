@@ -3,6 +3,7 @@ package com.dexter.slider.view
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,14 +26,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewmodel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         val list = viewmodel.getData()
+
+
+
         setAdapter(list)
 
     }
 
-    @SuppressLint("WrongConstant")
     fun setAdapter(posterList : List<DataModel>) {
         posterAdapter = PosterAdapter(posterList as MutableList<DataModel>)
-        val linearLayoutManager = LinearLayoutManager(this,LinearLayout.HORIZONTAL,false)
+        val linearLayoutManager = LinearLayoutManager(this)
         recycler.apply {
             layoutManager = linearLayoutManager
             this.adapter = posterAdapter

@@ -9,9 +9,10 @@ import com.dexter.slider.model.remote.DataModel
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 
-class PosterAdapter(val Poster_list : List<DataModel>) : RecyclerView.Adapter<PosterViewHolder>() {
+class PosterAdapter(val Poster_list: List<DataModel>) : RecyclerView.Adapter<PosterViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent , false)
+
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         return PosterViewHolder(view)
     }
 
@@ -24,9 +25,10 @@ class PosterAdapter(val Poster_list : List<DataModel>) : RecyclerView.Adapter<Po
     }
 
 }
-class PosterViewHolder(val itemView :View): RecyclerView.ViewHolder(itemView){
 
-    fun setData(dataModel: DataModel){
+class PosterViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun setData(dataModel: DataModel) {
         itemView.curr_number.setText(dataModel.getId())
         itemView.text_message.setText(dataModel.getTitle())
     }

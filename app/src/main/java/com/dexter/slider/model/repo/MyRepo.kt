@@ -16,64 +16,63 @@ import java.lang.Exception
 
 
 class MyRepo {
-    var list = mutableListOf<DataModel>()
 
+    val list = mutableListOf<DataModel>()
 
-    fun getData() : MutableList<DataModel> {
+    fun getData(): MutableList<DataModel> {
         val stringBuffer = StringBuffer()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val data : String = Network.apidata.getSlide()
+            val data: String = Network.apidata.getSlide()
 
             //set data in the StringBuffer
 
-            for (i in 0..data.length){
+            for (i in 0..data.length) {
                 val response = data
                 stringBuffer.append(response)
             }
 
-            stringBuffer.deleteCharAt(0)
-
             ResponseModel(stringBuffer)
-            Log.d("abhi",stringBuffer.toString())
-
-
-
-//            while (data != null ) {
-//                val responsedata = data
-//                stringBuffer.append(responsedata)
-//
-//                // delete the first char '/'
-//
-//                stringBuffer.deleteCharAt(0)
-//                Log.d("abhi", stringBuffer.toString())
-//
-//            }
-
+            Log.d("abhi", stringBuffer.toString())
 
         }
 
-        return list
+        Log.d("size", list.size.toString())
 
+        return list
 
     }
 
     private fun ResponseModel(stringBuffer: StringBuffer) {
-        try {
 
+        stringBuffer.deleteCharAt(0)
+
+        try {
             // Build a JSON object from the received string
 
             val jsonObject = JSONObject(stringBuffer.toString())
+            val array = jsonObject.getJSONArray("data")
+            for (i in 0 until array.length()) {
 
-            val title = jsonObject.getString("text")
-            val id = jsonObject.getString("id")
+                val jsonObject1 = JSONObject(array[i].toString())
+                val id = jsonObject1.get("id")
+                val text = jsonObject1.get("text")
 
-            val ModelData = DataModel( id, title)
-            list.add(ModelData)
+                Log.d("check1", id.toString())
+                Log.d("check2", text.toString())
 
+                var model = (DataModel(id.toString(), text.toString()))
+
+                list.add(model)
+
+                Log.d("list", list.size.toString())
+
+            }
+
+
+        } catch (execption: Exception) {
+            execption.printStackTrace()
         }
-        catch (execption : Exception){
-            execption.stackTrace
-        }
+
     }
 }

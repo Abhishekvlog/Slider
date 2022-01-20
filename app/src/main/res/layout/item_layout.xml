@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_margin="10dp"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/poster"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:src="#C4C4C4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C4C4C4"
+    >
 
     <TextView
         android:id="@+id/curr_number"
@@ -22,17 +20,20 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="22dp"
         android:textColor="@color/black"
-        android:layout_margin="25dp"/>
+        android:layout_margin="20dp"/>
 
     <TextView
         android:id="@+id/text_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="All the text here"
-        app:layout_constraintTop_toBottomOf="@+id/curr_number"
         android:textColor="@color/black"
         android:textSize="22dp"
         android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_below="@id/curr_number"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
