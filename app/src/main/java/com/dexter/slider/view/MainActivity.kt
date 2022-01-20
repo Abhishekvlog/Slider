@@ -14,6 +14,9 @@ import com.dexter.slider.model.repo.MyRepo
 import com.dexter.slider.view.adapter.PosterAdapter
 import com.dexter.slider.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,17 +28,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewmodel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        val list = viewmodel.getData()
+        CoroutineScope(Dispatchers.Main).launch {
+            val list = viewmodel.getData()
+            setAdapter(list)
+        }
 
 
-
-        setAdapter(list)
 
     }
 
+    @SuppressLint("WrongConstant")
     fun setAdapter(posterList : List<DataModel>) {
         posterAdapter = PosterAdapter(posterList as MutableList<DataModel>)
-        val linearLayoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = LinearLayoutManager(this,LinearLayout.HORIZONTAL,false)
         recycler.apply {
             layoutManager = linearLayoutManager
             this.adapter = posterAdapter

@@ -10,7 +10,7 @@ class MainViewModel() : ViewModel() {
 
     val repo = MyRepo()
 
-    fun getData(): MutableList<DataModel> {
+    suspend fun getData(): MutableList<DataModel> {
         return repo.getData()
     }
 

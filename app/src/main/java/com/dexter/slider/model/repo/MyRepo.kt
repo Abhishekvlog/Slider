@@ -12,6 +12,7 @@ import android.R.id
 import androidx.lifecycle.LiveData
 import com.dexter.slider.model.remote.Data
 import com.dexter.slider.model.remote.DataModel
+import kotlinx.coroutines.async
 import java.lang.Exception
 
 
@@ -19,10 +20,10 @@ class MyRepo {
 
     val list = mutableListOf<DataModel>()
 
-    fun getData(): MutableList<DataModel> {
+    suspend fun getData(): MutableList<DataModel> {
         val stringBuffer = StringBuffer()
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).async {
             val data: String = Network.apidata.getSlide()
 
             //set data in the StringBuffer
@@ -35,7 +36,7 @@ class MyRepo {
             ResponseModel(stringBuffer)
             Log.d("abhi", stringBuffer.toString())
 
-        }
+        }.await()
 
         Log.d("size", list.size.toString())
 
